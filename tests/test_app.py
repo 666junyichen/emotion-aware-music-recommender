@@ -16,8 +16,10 @@ def test_simulate_redirects_to_result():
     response = client.post("/simulate", data={"bpm": "76"}, follow_redirects=True)
 
     assert response.status_code == 200
-    assert b"Recommendation" in response.data
-    assert b"Emotion" in response.data
+    assert b"BPM 76" in response.data
+    assert b"low emotional state" in response.data
+    assert b"Public demo audio is playing" in response.data
+    assert b"demo-sad.wav" in response.data
 
 
 def test_stop_resets_session():

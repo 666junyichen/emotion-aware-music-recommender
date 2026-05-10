@@ -5,159 +5,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zen Music Recommender</title>
-    <style>
-        :root {
-            color-scheme: light;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7f2;
-            color: #1f2933;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            background:
-                radial-gradient(circle at top left, rgba(90, 141, 129, 0.18), transparent 32rem),
-                linear-gradient(135deg, #f8faf5 0%, #edf4f1 100%);
-        }
-
-        main {
-            width: min(92vw, 680px);
-            padding: 32px;
-        }
-
-        h1 {
-            margin: 0 0 12px;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1.05;
-        }
-
-        p {
-            line-height: 1.6;
-        }
-
-        .panel {
-            margin-top: 24px;
-            padding: 24px;
-            border: 1px solid rgba(31, 41, 51, 0.12);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.78);
-            box-shadow: 0 18px 60px rgba(31, 41, 51, 0.12);
-        }
-
-        .form-row {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        input {
-            flex: 1 1 180px;
-            min-height: 44px;
-            padding: 0 14px;
-            border: 1px solid rgba(31, 41, 51, 0.22);
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        button {
-            min-height: 46px;
-            padding: 0 18px;
-            border: 0;
-            border-radius: 6px;
-            background: #2f6f61;
-            color: white;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        button.secondary {
-            background: #475569;
-        }
-
-        .result-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
-            margin-top: 18px;
-        }
-
-        .metric {
-            padding: 14px;
-            border-radius: 6px;
-            background: #eef6f3;
-        }
-
-        .metric span {
-            display: block;
-            margin-top: 6px;
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        audio {
-            width: 100%;
-            margin-top: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
-    <main>
-        <h1>Zen Music Recommender</h1>
-        <p>Enter a heart-rate BPM value to map it to an emotional state and receive a matching music recommendation.</p>
-
+<body class="{{ emotion or 'Landing' }}">
+    <main class="app-shell">
         {% if track_title %}
-        <section class="panel" aria-labelledby="result-heading">
-            <h2 id="result-heading">Recommendation</h2>
-            <div class="result-grid">
-                <div class="metric">BPM<span>{{ bpm }}</span></div>
-                <div class="metric">Emotion<span>{{ emotion }}</span></div>
-                <div class="metric">Track<span>{{ track_title }}</span></div>
-                <div class="metric">Artist<span>{{ track_artist }}</span></div>
+        <section class="player-screen fade-in" aria-labelledby="recommendation-heading">
+            <div class="album-orbit {{ emotion|lower }}">
+                <div class="album-art">
+                    <span>{{ emotion[0] }}</span>
+                </div>
             </div>
 
-            <p>{{ emotion_text }}</p>
+            <div class="bpm-chip">
+                <span class="pulse-dot"></span>
+                <span>BPM {{ bpm }}</span>
+            </div>
 
-            {% if track_available and track_path %}
-            <audio controls>
-                <source src="{{ url_for('static', filename=track_path) }}" type="audio/mpeg">
+            <h1 id="recommendation-heading" class="track-title">{{ track_title }}</h1>
+            <p class="artist">{{ track_artist }}</p>
+            <p class="emotion-message">{{ emotion_text }}</p>
+
+            {% if uses_demo_audio %}
+            <p class="demo-note">Public demo audio is playing. Original licensed track assets are not included.</p>
+            {% endif %}
+
+            {% if audio_path %}
+            <audio class="audio-player" controls autoplay loop>
+                <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
                 Your browser does not support the audio element.
             </audio>
-            {% elif track_path %}
-            <p>This public demo does not include licensed audio assets. The selected track path is
-                <code>{{ track_path }}</code>.</p>
             {% endif %}
 
-            <form action="{{ url_for('stop') }}" method="post">
-                <button class="secondary" type="submit">Reset</button>
-            </form>
+            <div class="button-row">
+                <form action="{{ url_for('stop') }}" method="post">
+                    <button class="icon-button" type="submit" aria-label="Reset recommendation" title="Reset">
+                        <span aria-hidden="true">↻</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="feedback-popup" aria-label="Recommendation feedback">
+            <p>Does this music match how you feel?</p>
+            <div class="feedback-actions">
+                <button type="button">Yes</button>
+                <button type="button">No</button>
+            </div>
         </section>
         {% else %}
-        <section class="panel" aria-labelledby="input-heading">
-            <h2 id="input-heading">Try a BPM Input</h2>
+        <section class="landing-screen fade-in" aria-labelledby="landing-heading">
+            <div class="heart-mark" aria-hidden="true">♥</div>
+            <h1 id="landing-heading">Welcome to Zen Music</h1>
+            <p>Enter your heart rate to find music that mirrors your heartbeat.</p>
+
             {% if emotion_text %}
-            <p>{{ emotion_text }}</p>
+            <p class="status-note">{{ emotion_text }}</p>
             {% endif %}
-            <form action="{{ url_for('simulate') }}" method="post">
-                <label for="bpm">Heart-rate BPM</label>
-                <div class="form-row">
-                    <input id="bpm" name="bpm" type="number" min="40" max="180" value="76" required>
-                    <button type="submit">Recommend Music</button>
-                </div>
+
+            <form action="{{ url_for('simulate') }}" method="post" class="bpm-form">
+                <label class="sr-only" for="bpm">Heart-rate BPM</label>
+                <input id="bpm" name="bpm" type="number" min="40" max="180" value="76" placeholder="Enter your BPM"
+                    required>
+                <button type="submit" aria-label="Recommend music" title="Recommend music">
+                    <span aria-hidden="true">▶</span>
+                </button>
             </form>
+
+            <div class="sample-values" aria-label="Sample BPM values">
+                <span>Try 67</span>
+                <span>76</span>
+                <span>100</span>
+                <span>122</span>
+            </div>
         </section>
         {% endif %}
     </main>
+
+    <script>
+        document.querySelectorAll(".feedback-popup button").forEach((button) => {
+            button.addEventListener("click", () => {
+                const popup = document.querySelector(".feedback-popup");
+                if (popup) {
+                    popup.classList.add("dismissed");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

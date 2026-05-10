@@ -53,11 +53,11 @@ python -m pytest
 
 ## Current Public Version
 
-The public repository includes a minimal runnable template and no private media assets. It reproduces the core flow: BPM input, emotion mapping, recommendation rendering, and reset.
+The public repository includes a runnable template, CSS-based visual effects, and generated placeholder audio. It reproduces the core flow: BPM input, emotion mapping, recommendation rendering, browser playback, feedback popup, and reset.
 
 ## Full Media Demo Requirements
 
-To reproduce the original richer visual/audio demo, the following assets would need to be added under `static/` only if redistribution is allowed:
+To reproduce the original richer media demo exactly, the following assets would need to be added under `static/` only if redistribution is allowed:
 
 - `static/css/style.css`
 - `static/audio/`

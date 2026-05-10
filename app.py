@@ -51,6 +51,12 @@ emotion_covers = {
     "Calm": "images/Mask group.png"
 }
 
+demo_audio = {
+    "Happy": "audio/demo-happy.wav",
+    "Sad": "audio/demo-sad.wav",
+    "Calm": "audio/demo-calm.wav"
+}
+
 
 @app.route("/")
 def index():
@@ -72,6 +78,7 @@ def simulate():
     track = random.choice(matches) if matches else {"title": "", "filepath": "", "artist": ""}
     track_path = track["filepath"]
     track_available = bool(track_path) and os.path.exists(os.path.join(app.static_folder, track_path))
+    audio_path = track_path if track_available else demo_audio[emotion]
 
     # Store recommendation data for the result page.
     session["track"] = {
@@ -83,7 +90,9 @@ def simulate():
         "cover_image": emotion_covers[emotion],
         "cover": track["cover"],
         "track_path": track_path,
-        "track_available": track_available
+        "audio_path": audio_path,
+        "track_available": track_available,
+        "uses_demo_audio": not track_available
     }
 
     return redirect(url_for("result"))
@@ -112,7 +121,9 @@ def stop():
         track_artist=None,
         cover_image=emotion_covers["Calm"],
         track_path=None,
-        track_available=False
+        audio_path=None,
+        track_available=False,
+        uses_demo_audio=False
     )
 
 
