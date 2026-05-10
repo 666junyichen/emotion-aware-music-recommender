@@ -6,9 +6,9 @@ Zen Music Recommender is an emotion-aware music recommendation prototype that ma
 
 ## Demo
 
-<video src="docs/assets/demo-preview.mp4" controls muted width="100%"></video>
+[![Zen Music Recommender demo animation](docs/assets/demo-preview.gif)](docs/assets/demo-preview.mp4)
 
-Direct demo video: [docs/assets/demo-preview.mp4](docs/assets/demo-preview.mp4)
+Click the animated demo above to open the MP4 video: [docs/assets/demo-preview.mp4](docs/assets/demo-preview.mp4)
 
 The demo preview is a muted and cropped version of the original screen recording. It shows the local Flask web app running at `127.0.0.1:5000`, including BPM input, emotion-based music recommendation, animated playback visuals, generated demo audio, and the feedback popup.
 
@@ -77,9 +77,9 @@ Zen Music Recommender 是一个情绪感知音乐推荐原型系统。项目将�
 
 ## 演示
 
-<video src="docs/assets/demo-preview.mp4" controls muted width="100%"></video>
+[![Zen Music Recommender 演示动图](docs/assets/demo-preview.gif)](docs/assets/demo-preview.mp4)
 
-演示视频直达链接：[docs/assets/demo-preview.mp4](docs/assets/demo-preview.mp4)
+点击上方动图可以打开 MP4 演示视频：[docs/assets/demo-preview.mp4](docs/assets/demo-preview.mp4)
 
 这个演示视频是从原始录屏中裁剪、静音并压缩得到的公开预览版本。视频展示的是运行在 `127.0.0.1:5000` 的本地 Flask 网站，包括 BPM 输入、基于情绪的音乐推荐、动态播放视觉效果、合成 demo 音频和反馈弹窗。
 

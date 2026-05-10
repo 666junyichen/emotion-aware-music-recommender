@@ -50,7 +50,7 @@ The public repository should use the cleaned runnable demo and this evidence sum
 
 The README uses a muted, cropped, and compressed preview derived from the reviewed screen recording:
 
-- `docs/assets/demo-thumbnail.jpg`
+- `docs/assets/demo-preview.gif`
 - `docs/assets/demo-preview.mp4`
 
-The preview removes the browser address bar and source audio.
+The GIF plays directly in the README, and clicking it opens the MP4 version. The preview removes the browser address bar and source audio.
