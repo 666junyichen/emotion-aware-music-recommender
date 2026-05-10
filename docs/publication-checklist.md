@@ -22,6 +22,7 @@ Use this checklist before pushing the repository to a public GitHub profile.
 - The final report PDF currently in the root directory should not be published unless it is renamed, redacted, and checked for private or project-origin-identifying information.
 - `templates.zip`: should be extracted or replaced with normal source files if the full web UI is intended to be runnable from GitHub.
 - Audio, album, image, and icon assets: publish only if licensing allows public sharing.
+- External ECG dataset files: do not commit unless the dataset license explicitly allows redistribution.
 
 ## Do Not Include In Public Documentation
 

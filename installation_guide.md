@@ -30,6 +30,15 @@ python app.py
 http://127.0.0.1:5000
 ```
 
+## Verify The App
+
+Run the automated smoke tests:
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
 ## Usage
 
 1. Enter a heart-rate BPM value.
@@ -40,6 +49,8 @@ http://127.0.0.1:5000
 ## Notes
 
 - The web UI expects template and static assets to be present in the expected Flask folders.
+- The repository includes a minimal public template so the Flask prototype can run without private media assets.
+- The notebook workflow dependencies are listed separately in `requirements-notebook.txt`.
 - The notebook workflow requires access to the ECG dataset and additional modelling dependencies.
 - The current project is a prototype and should not be treated as a clinical or production-grade emotion detection system.
 

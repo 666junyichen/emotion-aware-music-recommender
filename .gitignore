@@ -10,7 +10,6 @@ random_forest_model.pkl
 scaler.pkl
 label_encoder.pkl
 *Final Report*.pdf
-COMP*.pdf
 predictions 1.json
-index.html
+/index.html
 templates.zip

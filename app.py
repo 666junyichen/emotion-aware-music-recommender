@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import json
+import os
 import random
 
 app = Flask(__name__)
-app.secret_key = "zen-secret-key"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key")
 
 # Load the curated music library.
 with open("music.json", "r") as f:
@@ -69,6 +70,8 @@ def simulate():
     # Select a matching track from the emotion-labelled music library.
     matches = [track for track in music_library if track["emotion"].lower() == emotion.lower()]
     track = random.choice(matches) if matches else {"title": "", "filepath": "", "artist": ""}
+    track_path = track["filepath"]
+    track_available = bool(track_path) and os.path.exists(os.path.join(app.static_folder, track_path))
 
     # Store recommendation data for the result page.
     session["track"] = {
@@ -79,7 +82,8 @@ def simulate():
         "track_artist": track["artist"],
         "cover_image": emotion_covers[emotion],
         "cover": track["cover"],
-        "track_path": track["filepath"]
+        "track_path": track_path,
+        "track_available": track_available
     }
 
     return redirect(url_for("result"))
@@ -107,7 +111,8 @@ def stop():
         track_title=None,
         track_artist=None,
         cover_image=emotion_covers["Calm"],
-        track_path=None
+        track_path=None,
+        track_available=False
     )
 
 

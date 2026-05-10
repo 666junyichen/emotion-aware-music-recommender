@@ -33,3 +33,7 @@ The prototype combines three parts:
 - scikit-learn
 - JSON
 - HTML and JavaScript
+
+## Runnable Demo
+
+The repository includes a minimal public Flask template so the web prototype can run without private media assets. The richer media experience can be restored by adding licensed static audio, album, image, and icon assets under `static/`.

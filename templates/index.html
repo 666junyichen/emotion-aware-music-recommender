@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zen Music Recommender</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7f2;
+            color: #1f2933;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at top left, rgba(90, 141, 129, 0.18), transparent 32rem),
+                linear-gradient(135deg, #f8faf5 0%, #edf4f1 100%);
+        }
+
+        main {
+            width: min(92vw, 680px);
+            padding: 32px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.05;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .panel {
+            margin-top: 24px;
+            padding: 24px;
+            border: 1px solid rgba(31, 41, 51, 0.12);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.78);
+            box-shadow: 0 18px 60px rgba(31, 41, 51, 0.12);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        input {
+            flex: 1 1 180px;
+            min-height: 44px;
+            padding: 0 14px;
+            border: 1px solid rgba(31, 41, 51, 0.22);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        button {
+            min-height: 46px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 6px;
+            background: #2f6f61;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #475569;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .metric {
+            padding: 14px;
+            border-radius: 6px;
+            background: #eef6f3;
+        }
+
+        .metric span {
+            display: block;
+            margin-top: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Zen Music Recommender</h1>
+        <p>Enter a heart-rate BPM value to map it to an emotional state and receive a matching music recommendation.</p>
+
+        {% if track_title %}
+        <section class="panel" aria-labelledby="result-heading">
+            <h2 id="result-heading">Recommendation</h2>
+            <div class="result-grid">
+                <div class="metric">BPM<span>{{ bpm }}</span></div>
+                <div class="metric">Emotion<span>{{ emotion }}</span></div>
+                <div class="metric">Track<span>{{ track_title }}</span></div>
+                <div class="metric">Artist<span>{{ track_artist }}</span></div>
+            </div>
+
+            <p>{{ emotion_text }}</p>
+
+            {% if track_available and track_path %}
+            <audio controls>
+                <source src="{{ url_for('static', filename=track_path) }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            {% elif track_path %}
+            <p>This public demo does not include licensed audio assets. The selected track path is
+                <code>{{ track_path }}</code>.</p>
+            {% endif %}
+
+            <form action="{{ url_for('stop') }}" method="post">
+                <button class="secondary" type="submit">Reset</button>
+            </form>
+        </section>
+        {% else %}
+        <section class="panel" aria-labelledby="input-heading">
+            <h2 id="input-heading">Try a BPM Input</h2>
+            {% if emotion_text %}
+            <p>{{ emotion_text }}</p>
+            {% endif %}
+            <form action="{{ url_for('simulate') }}" method="post">
+                <label for="bpm">Heart-rate BPM</label>
+                <div class="form-row">
+                    <input id="bpm" name="bpm" type="number" min="40" max="180" value="76" required>
+                    <button type="submit">Recommend Music</button>
+                </div>
+            </form>
+        </section>
+        {% endif %}
+    </main>
+</body>
+
+</html>
