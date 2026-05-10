@@ -13,3 +13,8 @@ label_encoder.pkl
 predictions 1.json
 /index.html
 templates.zip
+*Final_*/
+__MACOSX/
+*.pptx
+~$*.pptx
+*.mov

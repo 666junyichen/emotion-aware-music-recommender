@@ -53,6 +53,8 @@ pip install -r requirements-dev.txt
 python -m pytest
 ```
 
+Additional public-safe demo evidence is documented in `docs/demo-evidence.md`.
+
 ## 中文
 
 Zen Music Recommender 是一个情绪感知音乐推荐原型系统。项目将心率 BPM 输入映射到情绪状态，并根据情绪返回匹配的音乐体验。项目结合了 ECG 情绪建模、结构化音乐元数据和轻量级 Flask Web 界面。
@@ -105,3 +107,5 @@ python app.py
 pip install -r requirements-dev.txt
 python -m pytest
 ```
+
+脱敏后的 demo 证据记录在 `docs/demo-evidence.md`。
