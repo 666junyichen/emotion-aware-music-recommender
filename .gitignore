@@ -18,3 +18,4 @@ __MACOSX/
 *.pptx
 ~$*.pptx
 *.mov
+tmp_demo_frames/

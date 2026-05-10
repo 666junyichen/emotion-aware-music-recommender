@@ -39,9 +39,18 @@ The following evidence has been folded into the public repository:
 - Original final report PDF: contains private identifiers.
 - Original project readme PDF: contains contributor names and course-specific filenames.
 - Original slide deck: contains authorship metadata in at least one copy.
-- Original packaged source folder: includes nested `.git`, macOS metadata, duplicated code, and course-specific naming.
+- Original packaged source folder: includes nested `.git`, system metadata, duplicated code, and project-origin-specific naming.
 - Audio files, album artwork, fonts, and video files: require explicit license and privacy review before redistribution.
 
 ## Publication Decision
 
 The public repository should use the cleaned runnable demo and this evidence summary instead of publishing the original package wholesale. This keeps the GitHub project useful for reviewers while avoiding unnecessary exposure of private identifiers or redistribution-sensitive media.
+
+## README Demo Preview
+
+The README uses a muted, cropped, and compressed preview derived from the reviewed screen recording:
+
+- `docs/assets/demo-thumbnail.jpg`
+- `docs/assets/demo-preview.mp4`
+
+The preview removes the browser address bar and source audio.
