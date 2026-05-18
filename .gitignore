@@ -22,3 +22,5 @@ __MACOSX/
 tmp_demo_frames/
 
 .vercel
+.env
+*api 文件.txt

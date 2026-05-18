@@ -1,4 +1,7 @@
-from app import app
+import app as app_module
+
+
+app = app_module.app
 
 
 def test_home_page_loads():
@@ -46,7 +49,7 @@ def test_library_track_card_opens_player():
 
 def test_feedback_like_is_stored_in_session():
     client = app.test_client()
-    client.get("/track/tear-away")
+    client.get("/track/tear-away?bpm=76")
 
     response = client.post(
         "/feedback",
@@ -58,6 +61,38 @@ def test_feedback_like_is_stored_in_session():
     with client.session_transaction() as session:
         assert "tear-away" in session["feedback"]["liked"]
         assert session["feedback"]["post_listen_bpm"]["tear-away"] == 70
+
+
+def test_feedback_is_persisted_when_database_is_configured(monkeypatch):
+    class FakeFeedbackStore:
+        def __init__(self):
+            self.saved = []
+
+        def save_feedback_event(self, **event):
+            self.saved.append(event)
+
+    fake_store = FakeFeedbackStore()
+    monkeypatch.setattr(app_module, "feedback_store", fake_store)
+    client = app.test_client()
+    client.get("/track/tear-away?bpm=76")
+
+    response = client.post(
+        "/feedback",
+        data={"track_id": "tear-away", "action": "like", "post_bpm": "70"},
+        follow_redirects=True,
+    )
+
+    assert response.status_code == 200
+    assert fake_store.saved == [
+        {
+            "user_id": fake_store.saved[0]["user_id"],
+            "track_id": "tear-away",
+            "action": "like",
+            "pre_bpm": 76,
+            "post_bpm": 70,
+        }
+    ]
+    assert fake_store.saved[0]["user_id"]
 
 
 def test_stop_resets_session():

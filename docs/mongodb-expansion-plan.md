@@ -1,5 +1,18 @@
 # MongoDB Expansion Plan
 
+## Current Status
+
+MongoDB feedback persistence has been added as an optional enhancement.
+
+The app still works without MongoDB. When `MONGODB_URI` is present, feedback events from `/feedback` are written to the `feedback` collection in the configured database.
+
+Verified local connection:
+
+```text
+MONGODB_DB=pulsescape
+Atlas ping result: ok
+```
+
 ## Can This Project Use MongoDB?
 
 Yes. MongoDB Atlas is a good next step if PulseScape needs cross-device favorites, persistent feedback, and user-specific recommendation history.
@@ -66,18 +79,30 @@ The current app stores favorites in browser `localStorage` and feedback in the F
 
 Do not commit the MongoDB password.
 
-Use:
+Use the existing free Atlas cluster. Do not create another paid cluster just for this project.
+
+Keep the URI pointed at the existing cluster, and separate this app by database name:
 
 ```text
 MONGODB_URI=mongodb+srv://...
 MONGODB_DB=pulsescape
 ```
 
+You can also put the database name directly in the URI:
+
+```text
+mongodb+srv://username:password@cluster-host.mongodb.net/pulsescape?appName=cluster-name
+```
+
+However, keeping `MONGODB_DB=pulsescape` separate is clearer for this project.
+
 For Vercel, add these in the Vercel dashboard:
 
 Project Settings -> Environment Variables
 
 ## Minimal Implementation Steps
+
+These steps are now mostly complete for feedback persistence:
 
 1. Install dependency:
 
@@ -94,13 +119,11 @@ pymongo>=4.0
 3. Create `database.py`.
 4. Add helper functions:
 
-- `save_feedback(user_id, track_id, action, pre_bpm, post_bpm)`
-- `save_favorite(user_id, track_id)`
-- `get_user_liked_track_ids(user_id)`
-- `get_user_disliked_track_ids(user_id)`
+- `save_feedback_event(user_id, track_id, action, pre_bpm, post_bpm)`
 
 5. Add a simple guest user ID in session.
-6. Use stored liked/disliked track IDs in `score_track`.
+6. Future step: persist favorites.
+7. Future step: use stored liked/disliked track IDs in `score_track` across sessions.
 
 ## Recommendation Impact
 

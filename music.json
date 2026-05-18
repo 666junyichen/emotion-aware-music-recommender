@@ -11,11 +11,15 @@
     "tempo": 75,
     "filepath": "audio/Nocturne Samurai - Autumnal Smile.mp3",
     "cover": "album/autumn_smile.jpg",
-    "scene_image": "https://picsum.photos/seed/autumnal-smile-rain-window/1600/1000",
+    "scene_image": "images/scenes/autumnal-smile-pixabay.jpg",
     "scene_theme": "rainy window, autumn light, reflective piano",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/raindrop-glass-rain-window-wet-6544618/",
+    "scene_attribution": "Image by NickyPe on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "rainy window, autumn light, reflective piano"
   },
   {
     "id": "phantom-pain",
@@ -29,11 +33,15 @@
     "tempo": 68,
     "filepath": "audio/Roie Shpigler - Phantom Pain.mp3",
     "cover": "album/phantom_pain.jpg",
-    "scene_image": "https://picsum.photos/seed/phantom-pain-mist/1600/1000",
+    "scene_image": "images/scenes/phantom-pain-pixabay.jpg",
     "scene_theme": "misty blue corridor, low light, emotional distance",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/guy-man-people-dark-shadow-hands-2617866/",
+    "scene_attribution": "Image by StockSnap on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "misty blue corridor, low light, emotional distance"
   },
   {
     "id": "winter-lullaby",
@@ -47,11 +55,15 @@
     "tempo": 80,
     "filepath": "audio/Roie Shpigler - Winter Lullaby.mp3",
     "cover": "album/winter_lullaby.jpg",
-    "scene_image": "https://picsum.photos/seed/winter-lullaby-window/1600/1000",
+    "scene_image": "images/scenes/winter-lullaby-pixabay.jpg",
     "scene_theme": "winter window, muted blue snow, gentle lullaby",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/animal-avian-bird-cold-nature-1867125/",
+    "scene_attribution": "Image by Pexels on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "winter window, muted blue snow, gentle lullaby"
   },
   {
     "id": "shimmering-light",
@@ -65,11 +77,15 @@
     "tempo": 85,
     "filepath": "audio/Sparrow Tree - Shimmering Light.mp3",
     "cover": "album/shimmering_light.avif",
-    "scene_image": "https://picsum.photos/seed/shimmering-light-green/1600/1000",
+    "scene_image": "images/scenes/shimmering-light-pixabay.jpg",
     "scene_theme": "soft green water reflections, fragile shimmer",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/icicles-ice-drip-frozen-icy-1954827/",
+    "scene_attribution": "Image by Myriams-Fotos on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "soft green water reflections, fragile shimmer"
   },
   {
     "id": "distant-candle-light",
@@ -83,11 +99,15 @@
     "tempo": 77,
     "filepath": "audio/Tommy H Brandon - Distant Candle Light.mp3",
     "cover": "album/distant_candle_light.jpeg",
-    "scene_image": "https://picsum.photos/seed/distant-candle-light/1600/1000",
+    "scene_image": "images/scenes/distant-candle-light-pixabay.jpg",
     "scene_theme": "single warm candle, quiet dark room, recovery",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/lights-lamps-lanterns-incandescent-1088141/",
+    "scene_attribution": "Image by JillWellington on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "single warm candle, quiet dark room, recovery"
   },
   {
     "id": "can-ya-feel-it",
@@ -101,11 +121,15 @@
     "tempo": 122,
     "filepath": "audio/Bobby Coxx And The Righteous - Can Ya Feel it.mp3",
     "cover": "album/can_ya_feel_it.avif",
-    "scene_image": "https://picsum.photos/seed/can-ya-feel-it-sun/1600/1000",
+    "scene_image": "images/scenes/can-ya-feel-it-pixabay.jpg",
     "scene_theme": "gold sunlight, dancing street, high-energy warmth",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/new-year-mother-daughter-sunset-429158/",
+    "scene_attribution": "Image by VaniaMargaridaSl on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "gold sunlight, dancing street, high-energy warmth"
   },
   {
     "id": "oh-my",
@@ -119,11 +143,15 @@
     "tempo": 115,
     "filepath": "audio/Danny Shields - OH MY.mp3",
     "cover": "album/oh_my.jpg",
-    "scene_image": "https://picsum.photos/seed/oh-my-open-sky/1600/1000",
+    "scene_image": "images/scenes/oh-my-pixabay.jpg",
     "scene_theme": "open sky, citrus light, playful lift",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/kid-girl-father-happy-happiness-5141333/",
+    "scene_attribution": "Image by JessicaHorkey on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "open sky, citrus light, playful lift"
   },
   {
     "id": "funk-to-funk",
@@ -137,11 +165,15 @@
     "tempo": 128,
     "filepath": "audio/Devon May - Funk to Funk.mp3",
     "cover": "album/funk_to_funk.avif",
-    "scene_image": "https://picsum.photos/seed/funk-to-funk-lights/1600/1000",
+    "scene_image": "images/scenes/funk-to-funk-pixabay.jpg",
     "scene_theme": "warm city lights, movement, upbeat rhythm",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/city-traffic-lights-motion-4051537/",
+    "scene_attribution": "Image by hulkiokantabak on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "warm city lights, movement, upbeat rhythm"
   },
   {
     "id": "silly-lovebirds",
@@ -155,11 +187,15 @@
     "tempo": 118,
     "filepath": "audio/Gil Kita - Silly Lovebirds.mp3",
     "cover": "album/silly_lovebirds.jpg",
-    "scene_image": "https://picsum.photos/seed/silly-lovebirds-garden/1600/1000",
+    "scene_image": "images/scenes/silly-lovebirds-pixabay.jpg",
     "scene_theme": "bright garden, playful green, sunny acoustic",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/soap-bubbles-flowers-garden-meadow-3540303/",
+    "scene_attribution": "Image by Alexas_Fotos on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "bright garden, playful green, sunny acoustic"
   },
   {
     "id": "no-gloves",
@@ -173,11 +209,15 @@
     "tempo": 125,
     "filepath": "audio/Sunny Fruit - No Gloves.mp3",
     "cover": "album/no_gloves.avif",
-    "scene_image": "https://picsum.photos/seed/no-gloves-summer/1600/1000",
+    "scene_image": "images/scenes/no-gloves-pixabay.jpg",
     "scene_theme": "summer street, saturated light, joyful pulse",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/street-amsterdam-lights-light-4799914/",
+    "scene_attribution": "Image by camillebrogniart on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "summer street, saturated light, joyful pulse"
   },
   {
     "id": "tear-away",
@@ -191,11 +231,15 @@
     "tempo": 72,
     "filepath": "audio/Adi Goldstein - Tear Away.mp3",
     "cover": "album/tear_away.jpeg",
-    "scene_image": "https://picsum.photos/seed/tear-away-window/1600/1000",
+    "scene_image": "images/scenes/tear-away-pixabay.jpg",
     "scene_theme": "sunlit window, pale curtains, slow breathing",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/window-curtains-side-decoration-8313576/",
+    "scene_attribution": "Image by Janvanbizar on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "sunlit window, pale curtains, slow breathing"
   },
   {
     "id": "sunshine-rider",
@@ -209,11 +253,15 @@
     "tempo": 90,
     "filepath": "audio/Dor-c - Sunshine Rider - No Backing Vocals.mp3",
     "cover": "album/sunshine_rider.avif",
-    "scene_image": "https://picsum.photos/seed/sunshine-rider-path/1600/1000",
+    "scene_image": "images/scenes/sunshine-rider-pixabay.jpg",
     "scene_theme": "morning path, warm grass, balanced focus",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/meadow-path-trees-grass-sunrise-8001786/",
+    "scene_attribution": "Image by fietzfotos on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "morning path, warm grass, balanced focus"
   },
   {
     "id": "experience-sonder",
@@ -227,11 +275,15 @@
     "tempo": 80,
     "filepath": "audio/Flint - Experience Sonder - Instrumental Version.mp3",
     "cover": "album/experience_sonder.avif",
-    "scene_image": "https://picsum.photos/seed/experience-sonder-ocean/1600/1000",
+    "scene_image": "images/scenes/experience-sonder-pixabay.jpg",
     "scene_theme": "wide ocean horizon, soft blue air, quiet clarity",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/sea-clouds-evening-horizon-nature-6949256/",
+    "scene_attribution": "Image by 11514282 on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "wide ocean horizon, soft blue air, quiet clarity"
   },
   {
     "id": "into-the-light",
@@ -245,11 +297,15 @@
     "tempo": 78,
     "filepath": "audio/Roie Shpigler - Into the Light - Instrumental Version.mp3",
     "cover": "album/into_the_light.jpg",
-    "scene_image": "https://picsum.photos/seed/into-the-light-forest/1600/1000",
+    "scene_image": "images/scenes/into-the-light-pixabay.jpg",
     "scene_theme": "forest light opening, quiet hope, cinematic calm",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/christmas-background-hands-open-1926414/",
+    "scene_attribution": "Image by Myriams-Fotos on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "forest light opening, quiet hope, cinematic calm"
   },
   {
     "id": "weekdays-in-blue",
@@ -263,11 +319,15 @@
     "tempo": 70,
     "filepath": "audio/Simon Berggren Ballads - Weekdays in Blue.mp3",
     "cover": "album/weekday_in_blue.jpeg",
-    "scene_image": "https://picsum.photos/seed/weekdays-in-blue-room/1600/1000",
+    "scene_image": "images/scenes/weekdays-in-blue-pixabay.jpg",
     "scene_theme": "blue quiet room, slow afternoon, reflective calm",
     "license": "License review required before publishing original audio",
     "source_url": "",
-    "attribution": "Metadata preserved from original project library"
+    "attribution": "Metadata preserved from original project library",
+    "scene_source_url": "https://pixabay.com/photos/sleeping-dreaming-person-resting-1353562/",
+    "scene_attribution": "Image by WOKANDAPIX on Pixabay",
+    "scene_license": "Pixabay Content License",
+    "scene_query": "blue quiet room, slow afternoon, reflective calm"
   },
   {
     "id": "public-calm-piano-background",
@@ -281,12 +341,15 @@
     "tempo": 102,
     "filepath": "audio/public/calm-piano-background-music-free.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/calm-piano-background-window/1600/1000",
+    "scene_image": "images/scenes/public-calm-piano-background-pixabay.jpg",
     "scene_theme": "quiet study room, soft window light, calm piano focus",
     "scene_query": "quiet study room soft window light piano focus",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/calm-piano-background-music-free/",
-    "attribution": "Music by Alexander Blu via Orange Free Sounds"
+    "attribution": "Music by Alexander Blu via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/book-read-bible-knowledge-1870000/",
+    "scene_attribution": "Image by Pexels on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-melancholic-piano",
@@ -300,12 +363,15 @@
     "tempo": 68,
     "filepath": "audio/public/melancholic-piano-music.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/melancholic-piano-rain/1600/1000",
+    "scene_image": "images/scenes/public-melancholic-piano-pixabay.jpg",
     "scene_theme": "rainy window, dim room, melancholic piano",
     "scene_query": "rainy window dim room melancholic piano",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/melancholic-piano-music/",
-    "attribution": "Music by Alexander Blu via Orange Free Sounds"
+    "attribution": "Music by Alexander Blu via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/bedroom-cupboard-bed-room-sofa-1872196/",
+    "scene_attribution": "Image by manbob86 on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-the-entertainer",
@@ -319,12 +385,15 @@
     "tempo": 72,
     "filepath": "audio/public/the-entertainer-piano.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/ragtime-piano-sunroom/1600/1000",
+    "scene_image": "images/scenes/public-the-entertainer-pixabay.jpg",
     "scene_theme": "bright old piano room, playful ragtime afternoon",
     "scene_query": "bright vintage piano room playful afternoon",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/the-entertainer-song/",
-    "attribution": "Music by Alexander via Orange Free Sounds"
+    "attribution": "Music by Alexander via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/chairs-empty-office-room-table-2181916/",
+    "scene_attribution": "Image by Pexels on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-chopin-nocturne-op-9-no-2",
@@ -338,12 +407,15 @@
     "tempo": 64,
     "filepath": "audio/public/chopin-nocturne-op-9-no-2.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/chopin-nocturne-night/1600/1000",
+    "scene_image": "images/scenes/public-chopin-nocturne-op-9-no-2-pixabay.jpg",
     "scene_theme": "moonlit room, soft curtains, nocturne piano",
     "scene_query": "moonlit room soft curtains nocturne piano",
     "license": "Public Domain Mark 1.0",
     "source_url": "https://orangefreesounds.com/chopin-nocturne-op-9-no-2/",
-    "attribution": "Performance by Aya Higuchi via Orange Free Sounds"
+    "attribution": "Performance by Aya Higuchi via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/bedroom-interior-design-bed-room-5664221/",
+    "scene_attribution": "Image by peterweideman on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-ode-to-joy-piano",
@@ -357,12 +429,15 @@
     "tempo": 108,
     "filepath": "audio/public/ode-to-joy-melody-piano.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/ode-to-joy-sunlight/1600/1000",
+    "scene_image": "images/scenes/public-ode-to-joy-piano-pixabay.jpg",
     "scene_theme": "warm sunlight, open sky, joyful piano",
     "scene_query": "warm sunlight open sky joyful piano",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/ode-to-joy-melody-piano/",
-    "attribution": "Music by Alexander via Orange Free Sounds"
+    "attribution": "Music by Alexander via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/sky-cloud-fields-trees-landscape-10283423/",
+    "scene_attribution": "Image by fietzfotos on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-mozart-piano-concerto-23",
@@ -376,12 +451,15 @@
     "tempo": 66,
     "filepath": "audio/public/mozart-piano-concerto-23-adagio.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/mozart-study-light/1600/1000",
+    "scene_image": "images/scenes/public-mozart-piano-concerto-23-pixabay.jpg",
     "scene_theme": "elegant study room, soft morning classical piano",
     "scene_query": "elegant study room soft morning classical piano",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/mozart-piano-concerto-23/",
-    "attribution": "Music by Alexander via Orange Free Sounds"
+    "attribution": "Music by Alexander via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/books-library-room-school-study-2596809/",
+    "scene_attribution": "Image by StockSnap on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-free-calming-music",
@@ -395,12 +473,15 @@
     "tempo": 100,
     "filepath": "audio/public/free-calming-music.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/free-calming-garden/1600/1000",
+    "scene_image": "images/scenes/public-free-calming-music-pixabay.jpg",
     "scene_theme": "peaceful garden, soft green light, calming piano",
     "scene_query": "peaceful garden soft green light calming piano",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/free-calming-music/",
-    "attribution": "Music by Alexander Blu via Orange Free Sounds"
+    "attribution": "Music by Alexander Blu via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/fluffy-bird-string-flower-9589605/",
+    "scene_attribution": "Image by akirEVarga on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-twinkle-lullaby",
@@ -414,12 +495,15 @@
     "tempo": 87,
     "filepath": "audio/public/twinkle-twinkle-little-star-piano.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/twinkle-lullaby-bedroom/1600/1000",
+    "scene_image": "images/scenes/public-twinkle-lullaby-pixabay.jpg",
     "scene_theme": "warm bedroom, night lamp, soft lullaby",
     "scene_query": "warm bedroom night lamp soft lullaby",
     "license": "Creative Commons Attribution 4.0 International License",
     "source_url": "https://orangefreesounds.com/twinkle-twinkle-little-star-song/",
-    "attribution": "Music by Alexander Blu via Orange Free Sounds"
+    "attribution": "Music by Alexander Blu via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/light-lamp-bedside-lamp-465350/",
+    "scene_attribution": "Image by stevepb on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-traumerei",
@@ -433,12 +517,15 @@
     "tempo": 60,
     "filepath": "audio/public/traumerei-piano-music.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/traumerei-dream-room/1600/1000",
+    "scene_image": "images/scenes/public-traumerei-pixabay.jpg",
     "scene_theme": "dreamy room, pale morning, soft classical piano",
     "scene_query": "dreamy room pale morning soft classical piano",
     "license": "Public Domain Mark 1.0",
     "source_url": "https://orangefreesounds.com/traumerei-piano-music/",
-    "attribution": "Performance by Donald Betts via Orange Free Sounds"
+    "attribution": "Performance by Donald Betts via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/hydrangeas-wilted-flower-dry-flora-8519528/",
+    "scene_attribution": "Image by HeiKiwi on Pixabay",
+    "scene_license": "Pixabay Content License"
   },
   {
     "id": "public-salut-d-amour",
@@ -452,11 +539,14 @@
     "tempo": 92,
     "filepath": "audio/public/salut-d-amour.mp3",
     "cover": "",
-    "scene_image": "https://picsum.photos/seed/salut-damour-romantic-window/1600/1000",
+    "scene_image": "images/scenes/public-salut-d-amour-pixabay.jpg",
     "scene_theme": "romantic window light, piano and violin, gentle afternoon",
     "scene_query": "romantic window light piano violin gentle afternoon",
     "license": "Creative Commons Attribution 3.0 Unported",
     "source_url": "https://orangefreesounds.com/salut-d-amour/",
-    "attribution": "Performance by Emanuel Salvador via Orange Free Sounds"
+    "attribution": "Performance by Emanuel Salvador via Orange Free Sounds",
+    "scene_source_url": "https://pixabay.com/photos/candles-candlelight-lights-flame-64177/",
+    "scene_attribution": "Image by geralt on Pixabay",
+    "scene_license": "Pixabay Content License"
   }
 ]

@@ -34,6 +34,14 @@ $env:PEXELS_API_KEY="paste-your-key-here"
 python scripts/fetch_scene_images.py pexels
 ```
 
+If the script reaches Pexels but returns `HTTP Error 403: Forbidden`, the request is being rejected by Pexels. Common causes are:
+
+- The copied API key is incomplete or has an extra hidden character.
+- The Pexels API application is not fully approved or active yet.
+- The account still needs email verification or terms acceptance.
+
+The script sends the key in the standard `Authorization` header.
+
 The script updates `music.json` with:
 
 - `scene_image`
@@ -45,6 +53,20 @@ The script updates `music.json` with:
 ## Pixabay Alternative
 
 Pixabay is also a good choice, especially because your music candidates are mostly from Pixabay. However, Pixabay pages may use bot protection for direct page access. The API is still suitable for images after you get a key.
+
+Pixabay image URLs should not be used as permanent hotlinks. The fetch script now downloads returned images into:
+
+```text
+static/images/scenes/
+```
+
+Then it writes a local static path into `music.json`, such as:
+
+```text
+images/scenes/tear-away-pixabay.jpg
+```
+
+This is better for deployment because the app serves the images from the project instead of relying on temporary CDN URLs.
 
 Official API docs:
 

@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import sys
 import urllib.parse
 import urllib.request
@@ -8,12 +9,30 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MUSIC_PATH = ROOT / "music.json"
+SCENE_DIR = ROOT / "static" / "images" / "scenes"
 
 
 def request_json(url, headers=None):
     request = urllib.request.Request(url, headers=headers or {})
     with urllib.request.urlopen(request, timeout=20) as response:
         return json.loads(response.read().decode("utf-8"))
+
+
+def safe_slug(value):
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug or "scene"
+
+
+def download_scene_image(url, track_id, provider):
+    SCENE_DIR.mkdir(parents=True, exist_ok=True)
+    filename = f"{safe_slug(track_id)}-{provider}.jpg"
+    destination = SCENE_DIR / filename
+
+    request = urllib.request.Request(url, headers={"User-Agent": "PulseScape scene image fetcher"})
+    with urllib.request.urlopen(request, timeout=30) as response:
+        destination.write_bytes(response.read())
+
+    return f"images/scenes/{filename}"
 
 
 def search_pexels(query):
@@ -32,7 +51,7 @@ def search_pexels(query):
 
     photo = photos[0]
     return {
-        "scene_image": photo["src"]["large2x"],
+        "scene_image_url": photo["src"].get("large") or photo["src"]["large2x"],
         "scene_source_url": photo["url"],
         "scene_attribution": f"Photo by {photo['photographer']} on Pexels",
         "scene_license": "Pexels License",
@@ -61,7 +80,7 @@ def search_pixabay(query):
 
     image = hits[0]
     return {
-        "scene_image": image.get("largeImageURL") or image.get("webformatURL"),
+        "scene_image_url": image.get("largeImageURL") or image.get("webformatURL"),
         "scene_source_url": image.get("pageURL"),
         "scene_attribution": f"Image by {image.get('user', 'Pixabay creator')} on Pixabay",
         "scene_license": "Pixabay Content License",
@@ -82,6 +101,8 @@ def main():
         result = search(query)
         if not result:
             continue
+        image_url = result.pop("scene_image_url")
+        result["scene_image"] = download_scene_image(image_url, track.get("id", track["title"]), provider)
         track.update(result)
         track["scene_query"] = query
         updated += 1

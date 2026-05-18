@@ -3,8 +3,15 @@ import json
 import os
 import random
 
+from dotenv import load_dotenv
+
+from database import create_feedback_store, new_guest_user_id
+
+load_dotenv()
+
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret-key")
+feedback_store = create_feedback_store()
 
 
 def load_json(path):
@@ -270,6 +277,7 @@ def feedback():
     action = request.form.get("action", "")
     post_bpm = request.form.get("post_bpm", "").strip()
     current = session.get("feedback", {"liked": [], "disliked": [], "post_listen_bpm": {}})
+    parsed_post_bpm = None
 
     current.setdefault("liked", [])
     current.setdefault("disliked", [])
@@ -288,11 +296,22 @@ def feedback():
 
     if post_bpm and track_id:
         try:
-            current["post_listen_bpm"][track_id] = max(40, min(180, int(post_bpm)))
+            parsed_post_bpm = max(40, min(180, int(post_bpm)))
+            current["post_listen_bpm"][track_id] = parsed_post_bpm
         except ValueError:
             pass
 
     session["feedback"] = current
+    if track_id and (action in {"like", "dislike"} or parsed_post_bpm is not None):
+        session.setdefault("user_id", new_guest_user_id())
+        feedback_store.save_feedback_event(
+            user_id=session["user_id"],
+            track_id=track_id,
+            action=action or "post_bpm",
+            pre_bpm=session.get("track", {}).get("bpm"),
+            post_bpm=parsed_post_bpm,
+        )
+
     if "track" in session:
         session["track"]["feedback"] = current
     return redirect(url_for("result"))
