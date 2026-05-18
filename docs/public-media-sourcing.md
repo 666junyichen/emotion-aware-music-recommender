@@ -14,6 +14,33 @@ For the next public version:
 4. Record `source_url`, `license`, and `attribution` for every track.
 5. Replace placeholder scene images with licensed image URLs from Pexels or Pixabay.
 
+## Downloaded Public Audio
+
+The project now includes 10 real MP3 files in:
+
+```text
+static/audio/public/
+```
+
+These tracks have been added to `music.json` with `filepath`, `source_url`, `license`, and `attribution`.
+
+Downloaded files:
+
+| File | Track | License recorded in `music.json` |
+| --- | --- | --- |
+| `calm-piano-background-music-free.mp3` | Calm Piano Background Music Free | CC BY 4.0 |
+| `melancholic-piano-music.mp3` | Melancholic Piano Music | CC BY 4.0 |
+| `the-entertainer-piano.mp3` | The Entertainer Song | CC BY 4.0 |
+| `chopin-nocturne-op-9-no-2.mp3` | Chopin Nocturne op.9 no.2 | Public Domain Mark 1.0 |
+| `ode-to-joy-melody-piano.mp3` | Ode To Joy Melody Piano | CC BY 4.0 |
+| `mozart-piano-concerto-23-adagio.mp3` | Mozart Piano Concerto 23 | CC BY 4.0 |
+| `free-calming-music.mp3` | Free Calming Music | CC BY 4.0 |
+| `twinkle-twinkle-little-star-piano.mp3` | Twinkle Twinkle Little Star Song | CC BY 4.0 |
+| `traumerei-piano-music.mp3` | Traumerei - Piano Music | Public Domain Mark 1.0 |
+| `salut-d-amour.mp3` | Salut D Amour | CC BY 3.0 |
+ 
+The app can now play these MP3 files directly. Original project audio records remain in the library but still fall back to generated demo audio until their licenses are reviewed.
+
 ## Recommended Music Source
 
 Pixabay Music is the best first source for this project because track pages clearly show:
@@ -100,7 +127,7 @@ The app currently uses stable placeholder URLs from Picsum. That is fine for lay
 
 ### Pexels API
 
-Pexels API requires an API key in the `Authorization` header. Their docs ask API users to show a prominent Pexels link and credit photographers when possible.
+Pexels is the recommended first choice. Pexels API requires an API key in the `Authorization` header. The default free limits are 200 requests per hour and 20,000 requests per month. Their docs ask API users to show a prominent Pexels link and credit photographers when possible.
 
 Docs:
 

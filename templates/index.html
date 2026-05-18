@@ -90,12 +90,22 @@
                 {% endif %}
 
                 <audio class="audio-player" controls autoplay loop>
-                    <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
+                    <source src="{{ url_for('static', filename=audio_path) }}" type="{{ audio_type }}">
                     Your browser does not support the audio element.
                 </audio>
 
                 <div class="actions">
                     <button class="favorite-button" type="button" data-track-id="{{ track.id }}">Favorite</button>
+                    <form action="{{ url_for('feedback') }}" method="post">
+                        <input type="hidden" name="track_id" value="{{ track.id }}">
+                        <input type="hidden" name="action" value="like">
+                        <button type="submit">Like</button>
+                    </form>
+                    <form action="{{ url_for('feedback') }}" method="post">
+                        <input type="hidden" name="track_id" value="{{ track.id }}">
+                        <input type="hidden" name="action" value="dislike">
+                        <button type="submit">Not for me</button>
+                    </form>
                     <form action="{{ url_for('simulate') }}" method="post">
                         <input type="hidden" name="bpm" value="{{ bpm }}">
                         <button type="submit">Another track</button>
@@ -109,6 +119,13 @@
                     <p class="eyebrow">Why this track</p>
                     <p>{{ reason }}</p>
                 </section>
+
+                <form class="post-bpm-form" action="{{ url_for('feedback') }}" method="post">
+                    <input type="hidden" name="track_id" value="{{ track.id }}">
+                    <label for="post_bpm">After listening BPM</label>
+                    <input id="post_bpm" name="post_bpm" type="number" min="40" max="180" placeholder="{{ bpm }}">
+                    <button type="submit">Save listening result</button>
+                </form>
             </section>
         </section>
 

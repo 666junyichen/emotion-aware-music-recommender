@@ -44,6 +44,22 @@ def test_library_track_card_opens_player():
     assert b"Adi Goldstein - Tear Away" in response.data
 
 
+def test_feedback_like_is_stored_in_session():
+    client = app.test_client()
+    client.get("/track/tear-away")
+
+    response = client.post(
+        "/feedback",
+        data={"track_id": "tear-away", "action": "like", "post_bpm": "70"},
+        follow_redirects=True,
+    )
+
+    assert response.status_code == 200
+    with client.session_transaction() as session:
+        assert "tear-away" in session["feedback"]["liked"]
+        assert session["feedback"]["post_listen_bpm"]["tear-away"] == 70
+
+
 def test_stop_resets_session():
     client = app.test_client()
     client.post("/simulate", data={"bpm": "76"})

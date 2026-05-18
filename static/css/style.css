@@ -210,7 +210,8 @@ h2 {
 
 .bpm-form button,
 .actions button,
-.actions form button {
+.actions form button,
+.post-bpm-form button {
     min-height: 50px;
     border: 1px solid rgba(203, 233, 224, 0.35);
     border-radius: 12px;
@@ -345,6 +346,24 @@ h2 {
     border-radius: 14px;
     padding: 18px;
     background: var(--glass-strong);
+}
+
+.post-bpm-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    color: var(--muted);
+}
+
+.post-bpm-form input {
+    width: 120px;
+    min-height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 0 12px;
+    background: rgba(243, 241, 234, 0.1);
+    color: var(--ink);
 }
 
 .why p:last-child {

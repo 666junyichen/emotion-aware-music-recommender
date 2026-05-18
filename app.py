@@ -96,12 +96,21 @@ def score_track(track, bpm, predicted_emotion):
     track_energy = float(track.get("energy", 0.5))
     track_valence = float(track.get("valence", 0.5))
     track_tempo = int(track.get("tempo", bpm))
+    feedback = session.get("feedback", {})
+    track_id = track.get("id", "")
+    feedback_adjustment = 0
+
+    if track_id in feedback.get("liked", []):
+        feedback_adjustment += 8
+    if track_id in feedback.get("disliked", []):
+        feedback_adjustment -= 20
 
     return (
         emotion_score(predicted_emotion, track.get("emotion", "Calm")) * 40
         + normalized_bpm_score(bpm, track_tempo) * 30
         + (1 - abs(track_energy - profile["target_energy"])) * 15
         + (1 - abs(track_valence - profile["target_valence"])) * 10
+        + feedback_adjustment
         + random.random() * 2
     )
 
@@ -135,7 +144,7 @@ def similar_tracks_for(track, bpm):
 
 def build_player_payload(track, bpm, emotion):
     similar_tracks = similar_tracks_for(track, bpm)
-    audio_path, track_available = audio_for_track(track, emotion)
+    audio_path, track_available, audio_type = audio_for_track(track, emotion)
     return {
         "bpm": bpm,
         "emotion": emotion,
@@ -144,8 +153,10 @@ def build_player_payload(track, bpm, emotion):
         "track": track,
         "similar_tracks": similar_tracks,
         "audio_path": audio_path,
+        "audio_type": audio_type,
         "track_available": track_available,
         "uses_demo_audio": not track_available,
+        "feedback": session.get("feedback", {}),
     }
 
 
@@ -171,6 +182,7 @@ def build_reason(track, bpm, predicted_emotion):
 def audio_for_track(track, emotion):
     track_path = track.get("filepath", "")
     track_available = bool(track_path) and os.path.exists(os.path.join(app.static_folder, track_path))
+    audio_type = "audio/mpeg" if track_path.lower().endswith(".mp3") and track_available else "audio/wav"
     fallback = {
         "Happy": "audio/demo-happy.wav",
         "Sad": "audio/demo-sad.wav",
@@ -178,7 +190,11 @@ def audio_for_track(track, emotion):
         "Focused": "audio/demo-calm.wav",
         "Recovery": "audio/demo-sad.wav",
     }
-    return track_path if track_available else fallback.get(emotion, "audio/demo-calm.wav"), track_available
+    return (
+        track_path if track_available else fallback.get(emotion, "audio/demo-calm.wav"),
+        track_available,
+        audio_type if track_available else "audio/wav",
+    )
 
 
 def prepare_track(track):
@@ -245,6 +261,40 @@ def play_track(track_id):
         emotion = map_bpm_to_emotion(bpm)
 
     session["track"] = build_player_payload(track, bpm, emotion)
+    return redirect(url_for("result"))
+
+
+@app.route("/feedback", methods=["POST"])
+def feedback():
+    track_id = request.form.get("track_id", "")
+    action = request.form.get("action", "")
+    post_bpm = request.form.get("post_bpm", "").strip()
+    current = session.get("feedback", {"liked": [], "disliked": [], "post_listen_bpm": {}})
+
+    current.setdefault("liked", [])
+    current.setdefault("disliked", [])
+    current.setdefault("post_listen_bpm", {})
+
+    if action == "like" and track_id:
+        if track_id not in current["liked"]:
+            current["liked"].append(track_id)
+        if track_id in current["disliked"]:
+            current["disliked"].remove(track_id)
+    elif action == "dislike" and track_id:
+        if track_id not in current["disliked"]:
+            current["disliked"].append(track_id)
+        if track_id in current["liked"]:
+            current["liked"].remove(track_id)
+
+    if post_bpm and track_id:
+        try:
+            current["post_listen_bpm"][track_id] = max(40, min(180, int(post_bpm)))
+        except ValueError:
+            pass
+
+    session["feedback"] = current
+    if "track" in session:
+        session["track"]["feedback"] = current
     return redirect(url_for("result"))
 
 
