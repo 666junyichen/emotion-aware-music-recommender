@@ -14,7 +14,7 @@
 </head>
 
 <body class="mode-{{ mode }} mood-{{ emotion|default('Calm')|lower }}"
-    style="--scene-image: url('{{ track.scene_image if track else 'https://picsum.photos/seed/pulsescape-landing-forest/1600/1000' }}')">
+    style="--scene-image: url('{{ track.scene_image_url if track else landing_scene_image|default('https://picsum.photos/seed/pulsescape-landing-forest/1600/1000') }}')">
     <div class="scene-bg" aria-hidden="true"></div>
     <div class="scene-veil" aria-hidden="true"></div>
 
@@ -137,7 +137,7 @@
             <div class="track-grid">
                 {% for item in similar_tracks %}
                 <a class="track-card" href="{{ url_for('play_track', track_id=item.id, bpm=bpm) }}"
-                    style="--card-image: url('{{ item.scene_image }}')">
+                    style="--card-image: url('{{ item.scene_image_url }}')">
                     <div class="card-image"></div>
                     <div>
                         <h3>{{ item.title }}</h3>
@@ -170,7 +170,7 @@
             <div class="track-grid library-grid">
                 {% for item in library %}
                 <a class="track-card" href="{{ url_for('play_track', track_id=item.id) }}"
-                    style="--card-image: url('{{ item.scene_image }}')">
+                    style="--card-image: url('{{ item.scene_image_url }}')">
                     <div class="card-image"></div>
                     <div>
                         <h2>{{ item.title }}</h2>

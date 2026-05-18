@@ -24,6 +24,7 @@ def test_simulate_redirects_to_result():
     assert b"Why this track" in response.data
     assert b"Similar tracks" in response.data
     assert b"Public demo audio is playing" in response.data
+    assert b"/static/images/scenes/" in response.data
 
 
 def test_library_page_loads():

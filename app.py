@@ -139,6 +139,14 @@ def find_track(track_id):
     return None
 
 
+def scene_image_url(scene_image):
+    if not scene_image:
+        return "https://picsum.photos/seed/pulsescape-scene/1600/1000"
+    if scene_image.startswith(("http://", "https://", "/static/")):
+        return scene_image
+    return url_for("static", filename=scene_image)
+
+
 def similar_tracks_for(track, bpm):
     emotion = track.get("emotion", map_bpm_to_emotion(bpm))
     ranked = sorted(
@@ -211,12 +219,18 @@ def prepare_track(track):
     prepared.setdefault("vocal_type", "instrumental")
     prepared.setdefault("scene_theme", "soft atmospheric music room")
     prepared.setdefault("scene_image", f"https://picsum.photos/seed/{prepared['id']}/1600/1000")
+    prepared["scene_image_url"] = scene_image_url(prepared["scene_image"])
     return prepared
 
 
 @app.route("/")
 def index():
-    return render_template("index.html", mode="landing", library=music_library[:8])
+    return render_template(
+        "index.html",
+        mode="landing",
+        library=[prepare_track(track) for track in music_library[:8]],
+        landing_scene_image=scene_image_url("images/scenes/public-calm-piano-background-pixabay.jpg"),
+    )
 
 
 @app.route("/simulate", methods=["POST"])
@@ -328,7 +342,8 @@ def stop():
     return render_template(
         "index.html",
         mode="landing",
-        library=music_library[:8],
+        library=[prepare_track(track) for track in music_library[:8]],
+        landing_scene_image=scene_image_url("images/scenes/public-calm-piano-background-pixabay.jpg"),
         emotion_text="Music stopped. You can try another heartbeat.",
     )
 
