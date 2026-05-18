@@ -115,6 +115,40 @@ def recommend_track(bpm, predicted_emotion):
     return ranked[0], ranked[1:5]
 
 
+def find_track(track_id):
+    for track in music_library:
+        prepared = prepare_track(track)
+        if prepared["id"] == track_id:
+            return prepared
+    return None
+
+
+def similar_tracks_for(track, bpm):
+    emotion = track.get("emotion", map_bpm_to_emotion(bpm))
+    ranked = sorted(
+        [prepare_track(item) for item in music_library if prepare_track(item)["id"] != track["id"]],
+        key=lambda item: score_track(item, bpm, emotion),
+        reverse=True,
+    )
+    return ranked[:4]
+
+
+def build_player_payload(track, bpm, emotion):
+    similar_tracks = similar_tracks_for(track, bpm)
+    audio_path, track_available = audio_for_track(track, emotion)
+    return {
+        "bpm": bpm,
+        "emotion": emotion,
+        "emotion_text": emotion_profiles[emotion]["message"],
+        "reason": build_reason(track, bpm, emotion),
+        "track": track,
+        "similar_tracks": similar_tracks,
+        "audio_path": audio_path,
+        "track_available": track_available,
+        "uses_demo_audio": not track_available,
+    }
+
+
 def build_reason(track, bpm, predicted_emotion):
     tempo = int(track.get("tempo", bpm))
     energy = float(track.get("energy", 0.5))
@@ -177,19 +211,10 @@ def simulate():
     track, similar_tracks = recommend_track(bpm, predicted_emotion)
     track = prepare_track(track)
     similar_tracks = [prepare_track(item) for item in similar_tracks]
-    audio_path, track_available = audio_for_track(track, predicted_emotion)
 
-    session["track"] = {
-        "bpm": bpm,
-        "emotion": predicted_emotion,
-        "emotion_text": emotion_profiles[predicted_emotion]["message"],
-        "reason": build_reason(track, bpm, predicted_emotion),
-        "track": track,
-        "similar_tracks": similar_tracks,
-        "audio_path": audio_path,
-        "track_available": track_available,
-        "uses_demo_audio": not track_available,
-    }
+    payload = build_player_payload(track, bpm, predicted_emotion)
+    payload["similar_tracks"] = similar_tracks
+    session["track"] = payload
 
     return redirect(url_for("result"))
 
@@ -201,6 +226,26 @@ def result():
         return redirect(url_for("index"))
 
     return render_template("index.html", mode="result", library=music_library, **payload)
+
+
+@app.route("/track/<track_id>")
+def play_track(track_id):
+    track = find_track(track_id)
+    if not track:
+        return redirect(url_for("library"))
+
+    try:
+        bpm = int(request.args.get("bpm", track.get("tempo", 76)))
+    except (ValueError, TypeError):
+        bpm = int(track.get("tempo", 76))
+
+    bpm = max(40, min(180, bpm))
+    emotion = track.get("emotion", map_bpm_to_emotion(bpm))
+    if emotion not in emotion_profiles:
+        emotion = map_bpm_to_emotion(bpm)
+
+    session["track"] = build_player_payload(track, bpm, emotion)
+    return redirect(url_for("result"))
 
 
 @app.route("/library")
