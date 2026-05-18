@@ -1,0 +1,19 @@
+.git
+.pytest_cache
+__pycache__
+*.pyc
+
+COMP5425Final_*/
+tmp_demo_frames/
+stitch zip/
+
+*.pptx
+*.pdf
+*.zip
+*.ipynb
+.DS_Store
+
+requirements-dev.txt
+requirements-notebook.txt
+tests/
+docs/assets/
