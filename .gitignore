@@ -20,3 +20,5 @@ __MACOSX/
 ~$*.pptx
 *.mov
 tmp_demo_frames/
+
+.vercel
