@@ -4,94 +4,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zen Music Recommender</title>
+    <title>PulseScape | Heartbeat Music Sanctuary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body class="{{ emotion or 'Landing' }}">
+<body class="mode-{{ mode }} mood-{{ emotion|default('Calm')|lower }}"
+    style="--scene-image: url('{{ track.scene_image if track else 'https://picsum.photos/seed/pulsescape-landing-forest/1600/1000' }}')">
+    <div class="scene-bg" aria-hidden="true"></div>
+    <div class="scene-veil" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('index') }}">PulseScape</a>
+        <nav aria-label="Primary navigation">
+            <a href="{{ url_for('index') }}">Sanctuary</a>
+            <a href="{{ url_for('library') }}">Library</a>
+            {% if mode == 'result' %}
+            <a href="#similar">Similar</a>
+            {% endif %}
+        </nav>
+    </header>
+
     <main class="app-shell">
-        {% if track_title %}
-        <section class="player-screen fade-in" aria-labelledby="recommendation-heading">
-            <div class="album-orbit {{ emotion|lower }}">
-                <div class="album-art">
-                    <span>{{ emotion[0] }}</span>
-                </div>
-            </div>
-
-            <div class="bpm-chip">
-                <span class="pulse-dot"></span>
-                <span>BPM {{ bpm }}</span>
-            </div>
-
-            <h1 id="recommendation-heading" class="track-title">{{ track_title }}</h1>
-            <p class="artist">{{ track_artist }}</p>
-            <p class="emotion-message">{{ emotion_text }}</p>
-
-            {% if uses_demo_audio %}
-            <p class="demo-note">Public demo audio is playing. Original licensed track assets are not included.</p>
-            {% endif %}
-
-            {% if audio_path %}
-            <audio class="audio-player" controls autoplay loop>
-                <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
-                Your browser does not support the audio element.
-            </audio>
-            {% endif %}
-
-            <div class="button-row">
-                <form action="{{ url_for('stop') }}" method="post">
-                    <button class="icon-button" type="submit" aria-label="Reset recommendation" title="Reset">
-                        <span aria-hidden="true">↻</span>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <section class="feedback-popup" aria-label="Recommendation feedback">
-            <p>Does this music match how you feel?</p>
-            <div class="feedback-actions">
-                <button type="button">Yes</button>
-                <button type="button">No</button>
-            </div>
-        </section>
-        {% else %}
-        <section class="landing-screen fade-in" aria-labelledby="landing-heading">
-            <div class="heart-mark" aria-hidden="true">♥</div>
-            <h1 id="landing-heading">Welcome to Zen Music</h1>
-            <p>Enter your heart rate to find music that mirrors your heartbeat.</p>
+        {% if mode == 'landing' %}
+        <section class="landing" aria-labelledby="landing-title">
+            <p class="eyebrow">Heartbeat-based recommendation</p>
+            <h1 id="landing-title">Find music that moves with your heartbeat.</h1>
+            <p class="intro">Enter your current BPM and step into a quiet music room shaped by your rhythm.</p>
 
             {% if emotion_text %}
             <p class="status-note">{{ emotion_text }}</p>
             {% endif %}
 
             <form action="{{ url_for('simulate') }}" method="post" class="bpm-form">
-                <label class="sr-only" for="bpm">Heart-rate BPM</label>
-                <input id="bpm" name="bpm" type="number" min="40" max="180" value="76" placeholder="Enter your BPM"
-                    required>
-                <button type="submit" aria-label="Recommend music" title="Recommend music">
-                    <span aria-hidden="true">▶</span>
-                </button>
+                <label for="bpm">Current BPM</label>
+                <div class="pulse-input">
+                    <input id="bpm" name="bpm" type="number" min="40" max="180" value="76" required>
+                    <span>BPM</span>
+                </div>
+                <button type="submit">Find my track</button>
             </form>
 
             <div class="sample-values" aria-label="Sample BPM values">
-                <span>Try 67</span>
-                <span>76</span>
-                <span>100</span>
-                <span>122</span>
+                <button type="button" data-bpm="62">62</button>
+                <button type="button" data-bpm="76">76</button>
+                <button type="button" data-bpm="88">88</button>
+                <button type="button" data-bpm="104">104</button>
+                <button type="button" data-bpm="122">122</button>
+            </div>
+
+            <p class="disclaimer">Music recommendation demo only. Not medical advice.</p>
+        </section>
+        {% elif mode == 'result' %}
+        <section class="room-grid" aria-labelledby="track-title">
+            <aside class="side-panel" aria-label="Current listening state">
+                <p class="eyebrow">Detected state</p>
+                <div class="bpm-readout">{{ bpm }}<span>BPM</span></div>
+                <p class="emotion-pill">{{ emotion }}</p>
+                <p>{{ emotion_text }}</p>
+            </aside>
+
+            <section class="player-panel">
+                <div class="track-meta">
+                    <p class="eyebrow">{{ track.genre }} / {{ track.vocal_type }}</p>
+                    <h1 id="track-title">{{ track.title }}</h1>
+                    <p class="artist">{{ track.artist }}</p>
+                </div>
+
+                <div class="pulse-disc" aria-hidden="true">
+                    <span>{{ emotion[0] }}</span>
+                </div>
+
+                <div class="metrics">
+                    <span>Track {{ track.tempo }} BPM</span>
+                    <span>Energy {{ "%.2f"|format(track.energy) }}</span>
+                    <span>Valence {{ "%.2f"|format(track.valence) }}</span>
+                </div>
+
+                {% if uses_demo_audio %}
+                <p class="demo-note">Public demo audio is playing. Original licensed track assets are not included.</p>
+                {% endif %}
+
+                <audio class="audio-player" controls autoplay loop>
+                    <source src="{{ url_for('static', filename=audio_path) }}" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <div class="actions">
+                    <button class="favorite-button" type="button" data-track-id="{{ track.id }}">♡ Favorite</button>
+                    <form action="{{ url_for('simulate') }}" method="post">
+                        <input type="hidden" name="bpm" value="{{ bpm }}">
+                        <button type="submit">Another track</button>
+                    </form>
+                    <form action="{{ url_for('stop') }}" method="post">
+                        <button type="submit">Reset</button>
+                    </form>
+                </div>
+
+                <section class="why">
+                    <p class="eyebrow">Why this track</p>
+                    <p>{{ reason }}</p>
+                </section>
+            </section>
+        </section>
+
+        <section class="similar-section" id="similar" aria-labelledby="similar-title">
+            <div class="section-heading">
+                <p class="eyebrow">Discovery</p>
+                <h2 id="similar-title">Similar tracks</h2>
+            </div>
+            <div class="track-grid">
+                {% for item in similar_tracks %}
+                <article class="track-card" style="--card-image: url('{{ item.scene_image }}')">
+                    <div class="card-image"></div>
+                    <div>
+                        <h3>{{ item.title }}</h3>
+                        <p>{{ item.artist }}</p>
+                        <div class="tag-row">
+                            <span>{{ item.tempo }} BPM</span>
+                            <span>{{ item.emotion }}</span>
+                            <span>{{ item.genre }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% else %}
+        <section class="library-page" aria-labelledby="library-title">
+            <div class="section-heading">
+                <p class="eyebrow">Expanded dataset</p>
+                <h1 id="library-title">Music library</h1>
+                <p>Browse the current metadata library. Each song now has mood, genre, vocal type, tempo, energy,
+                    valence, and a scene image slot.</p>
+            </div>
+            <div class="filters" aria-label="Library filters">
+                <span>Calm</span>
+                <span>Happy</span>
+                <span>Sad</span>
+                <span>Instrumental</span>
+                <span>Vocal</span>
+            </div>
+            <div class="track-grid library-grid">
+                {% for item in library %}
+                <article class="track-card" style="--card-image: url('{{ item.scene_image }}')">
+                    <div class="card-image"></div>
+                    <div>
+                        <h2>{{ item.title }}</h2>
+                        <p>{{ item.artist }}</p>
+                        <div class="tag-row">
+                            <span>{{ item.tempo }} BPM</span>
+                            <span>{{ item.emotion }}</span>
+                            <span>{{ item.genre }}</span>
+                            <span>{{ item.vocal_type }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
             </div>
         </section>
         {% endif %}
     </main>
 
+    <section class="favorites-drawer" aria-label="Favorite tracks">
+        <div>
+            <p class="eyebrow">Favorites</p>
+            <ul id="favorite-list"></ul>
+        </div>
+    </section>
+
     <script>
-        document.querySelectorAll(".feedback-popup button").forEach((button) => {
+        document.querySelectorAll("[data-bpm]").forEach((button) => {
             button.addEventListener("click", () => {
-                const popup = document.querySelector(".feedback-popup");
-                if (popup) {
-                    popup.classList.add("dismissed");
+                const input = document.querySelector("#bpm");
+                if (input) input.value = button.dataset.bpm;
+            });
+        });
+
+        const favoriteButtons = document.querySelectorAll(".favorite-button");
+        const favoriteList = document.querySelector("#favorite-list");
+        const favorites = JSON.parse(localStorage.getItem("pulsescape:favorites") || "[]");
+
+        function renderFavorites() {
+            if (!favoriteList) return;
+            favoriteList.innerHTML = "";
+            favorites.forEach((title) => {
+                const item = document.createElement("li");
+                item.textContent = title;
+                favoriteList.appendChild(item);
+            });
+        }
+
+        favoriteButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const title = document.querySelector("#track-title")?.textContent?.trim();
+                if (title && !favorites.includes(title)) {
+                    favorites.push(title);
+                    localStorage.setItem("pulsescape:favorites", JSON.stringify(favorites));
+                    button.textContent = "♥ Favorited";
+                    renderFavorites();
                 }
             });
         });
+
+        renderFavorites();
     </script>
 </body>
 

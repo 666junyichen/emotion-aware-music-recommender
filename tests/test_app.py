@@ -7,7 +7,8 @@ def test_home_page_loads():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert b"Zen Music Recommender" in response.data
+    assert b"PulseScape" in response.data
+    assert b"Find my track" in response.data
 
 
 def test_simulate_redirects_to_result():
@@ -16,10 +17,20 @@ def test_simulate_redirects_to_result():
     response = client.post("/simulate", data={"bpm": "76"}, follow_redirects=True)
 
     assert response.status_code == 200
-    assert b"BPM 76" in response.data
-    assert b"low emotional state" in response.data
+    assert b"BPM" in response.data
+    assert b"Why this track" in response.data
+    assert b"Similar tracks" in response.data
     assert b"Public demo audio is playing" in response.data
-    assert b"demo-sad.wav" in response.data
+
+
+def test_library_page_loads():
+    client = app.test_client()
+
+    response = client.get("/library")
+
+    assert response.status_code == 200
+    assert b"Music library" in response.data
+    assert b"Expanded dataset" in response.data
 
 
 def test_stop_resets_session():
